@@ -3,7 +3,7 @@
     <v-card class="px-2 px-md-4 pt-5 pt-md-10 pb-5">
         <v-row>
             <v-col cols="12" md="6">
-                <InputField
+                <TextInputField
                     label="Email"
                     type="email"
                     v-model="data_form.email"
@@ -11,14 +11,14 @@
                 />
             </v-col>
             <v-col cols="12" md="6">
-                <InputField
+                <TextInputField
                     label="Mobile Number"
                     v-model="data_form.mobile_number"
                     :errors="v$.mobile_number.$errors"
                 />
             </v-col>
         </v-row>
-        <InputField
+        <TextInputField
             label="Address"
             v-model="data_form.address"
             :errors="v$.address.$errors"
@@ -49,7 +49,7 @@
 <script setup>
 import { reactive } from '@vue/reactivity';
 
-import InputField from '../Forms/InputField.vue';
+import TextInputField from '../Forms/TextInputField.vue';
 import CheckboxField from '../Forms/CheckboxField.vue';
 
 import useVuelidate from '@vuelidate/core'

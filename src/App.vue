@@ -23,7 +23,9 @@
     </v-navigation-drawer>
 
     <v-main>
-      <router-view></router-view>
+      <v-responsive>
+        <router-view></router-view>
+      </v-responsive>
     </v-main>
 
     <v-app-bar 
@@ -56,7 +58,7 @@ export default {
 
   data() {
     return {
-      data_isOpen: true,
+      data_isOpen: false,
 
     }
   },
