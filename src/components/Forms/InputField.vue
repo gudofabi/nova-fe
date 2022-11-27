@@ -6,6 +6,7 @@
         :value="modelValue"
         :error-messages="comp_errorMessages"
         @input="func_updateInput"
+        :variant="variant"
     ></v-text-field>
   </div>
 </template>
@@ -32,7 +33,7 @@ export default {
         errors: {
             type: [Array, Object],
             default: () => {}
-        }
+        },
     },
 
     computed: {

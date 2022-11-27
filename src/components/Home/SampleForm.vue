@@ -3,7 +3,7 @@
     <v-card class="px-2 px-md-4 pt-5 pt-md-10 pb-5">
         <v-row>
             <v-col cols="12" md="6">
-                <TextInputField
+                <InputField
                     label="Email"
                     type="email"
                     v-model="data_form.email"
@@ -11,25 +11,27 @@
                 />
             </v-col>
             <v-col cols="12" md="6">
-                <TextInputField
+                <InputField
                     label="Mobile Number"
                     v-model="data_form.mobile_number"
                     :errors="v$.mobile_number.$errors"
                 />
             </v-col>
         </v-row>
-        <TextInputField
+        <InputField
             label="Address"
             v-model="data_form.address"
             :errors="v$.address.$errors"
         />
-        
-        <CheckboxField 
-            label="Do you agree?"
-            v-model="data_form.agree"
-            :errors="v$.agree.$errors"
-        />
 
+        <SelectField 
+            label="States"
+            :options="states"
+            v-model="data_form.states"
+            :errors="v$.states.$errors"
+            :multiple="true"
+        />
+        
         <CheckboxField 
             label="Accepting Terms and Condition"
             v-model="data_form.terms"
@@ -47,10 +49,11 @@
 </template>
 
 <script setup>
-import { reactive } from '@vue/reactivity';
+import { reactive, ref } from '@vue/reactivity';
 
-import TextInputField from '../Forms/TextInputField.vue';
+import InputField from '../Forms/InputField.vue';
 import CheckboxField from '../Forms/CheckboxField.vue';
+import SelectField from '../Forms/SelectField.vue';
 
 import useVuelidate from '@vuelidate/core'
 import { required, email, helpers, sameAs } from '@vuelidate/validators'
@@ -61,17 +64,34 @@ const data_form = reactive({
     email: '',
     mobile_number: '',
     address: '',
-    agree: false,
-    terms: false
+    states: [],
+    terms: false,
 })
+
+const states = ref([
+          'Alabama', 'Alaska', 'American Samoa', 'Arizona',
+          'Arkansas', 'California', 'Colorado', 'Connecticut',
+          'Delaware', 'District of Columbia', 'Federated States of Micronesia',
+          'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
+          'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+          'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
+          'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+          'Missouri', 'Montana', 'Nebraska', 'Nevada',
+          'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
+          'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
+          'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
+          'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
+          'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
+          'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
+        ]);
 
 // VALIDATIONS ----------------------------------------
 const data_rules = computed(() => ({
     email: { required: helpers.withMessage('Please provide a valid email',required), email },
     mobile_number: { required: helpers.withMessage('Please provide a valid mobile number',required) },
     address: { required: helpers.withMessage('Please provide a valid Address',required) },
-    agree: { sameAs: helpers.withMessage('You must agree',sameAs(true)) },
     terms: { sameAs: helpers.withMessage('You must accept the Terms and Conditions',sameAs(true)) },
+    states: { required: helpers.withMessage('Please select states',required) },
 }))
 
 // USE VUEVALIDATE 
