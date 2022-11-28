@@ -1,12 +1,12 @@
 <template>
   <v-app>
     
-    <!-- <NavigationDrawer :is-open="data_isOpen" /> -->
     <v-navigation-drawer
         v-model="data_isOpen"
         image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
         permanent
         theme="dark"
+        v-if="comp_authenticated"
     >
         <template v-slot:prepend>
             <v-list-item
@@ -32,6 +32,7 @@
       title="Novadeci"
       color="teal-darken-1"
       image="https://picsum.photos/1920/1080?random"
+      v-if="comp_authenticated"
     >
         <template v-slot:image>
           <v-img
@@ -50,16 +51,29 @@
 
 <script>
 import NavigationDrawerLinks from '@/components/Layouts/NavigationDrawerLinks.vue';
+import { useAuthStore } from './stores/auth';
 
 export default {
   components: {
     NavigationDrawerLinks
   },
 
+  setup() {
+    const authUser = useAuthStore();
+
+    return { authUser }
+  },
+
   data() {
     return {
       data_isOpen: false,
 
+    }
+  },
+
+  computed: {
+    comp_authenticated() {
+      return !this.authUser.authenticated; // remove bang sign to hide the navbar and navdrawer
     }
   },
 
