@@ -1,5 +1,6 @@
 <template>
     <v-list nav>
+        <v-list-item @click="$router.push('/employee')" title="Employees" value="employees" prepend-icon="fas fa-users"></v-list-item>
         <v-list-item @click="$router.push('/')" title="Inbox" value="inbox" prepend-icon="fas fa-envelope"></v-list-item>
         <v-list-item title="Supervisors" value="supervisors" prepend-icon="fas fa-user-tie"></v-list-item>
         <v-list-item title="Clock-in" value="clockin" prepend-icon="fas fa-clock"></v-list-item>
