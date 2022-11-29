@@ -20,28 +20,77 @@
             </tr>
             </tbody>
         </v-table>
-        <v-pagination
-        v-model="page"
-        :length="6"
-        ></v-pagination>
+        <Pagination :data="laravelData" @pagination-change-page="getResults" />
     </div>
   </template>
   
   <script>
+  import LaravelVuePagination from 'laravel-vue-pagination';
   export default {
+    components: {
+      'Pagination': LaravelVuePagination
+    },
     data () {
       return {
         page: 1,
         pageSize: 0,
         headers: null,
-        datas: null
+        laravelData: [],
+        datas: [
+          {
+            name: 'Frozen Yogurt',
+            description: 159,
+          },
+          {
+            name: 'Ice cream sandwich',
+            description: 237,
+          },
+          {
+            name: 'Eclair',
+            description: 262,
+          },
+          {
+            name: 'Cupcake',
+            description: 305,
+          },
+          {
+            name: 'Gingerbread',
+            description: 356,
+          },
+          {
+            name: 'Jelly bean',
+            description: 375,
+          },
+          {
+            name: 'Lollipop',
+            description: 392,
+          },
+          {
+            name: 'Honeycomb',
+            description: 408,
+          },
+          {
+            name: 'Donut',
+            description: 452,
+          },
+          {
+            name: 'KitKat',
+            description: 518,
+          },
+        ],
       }
     },
-    // mounted () {
-    //     if (this.datas) {
-    //         this.pageSize = this.datas.length/5
-    //     }
-    // }
+    mounted(){
+      this.getResults();
+    },
+    methods:{
+      getResults(page = 1) {
+            axios.get('/employee?page=' + page)
+                .then(response => {
+                    this.laravelData = response.data;
+                });
+        }
+    }
   }
   </script>
   
