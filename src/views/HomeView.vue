@@ -7,18 +7,18 @@
 
         <v-col  cols="12" md="6">
             <v-card class="px-2 px-md-4 pt-5 pt-md-10 pb-5">
-                Sample text here!
-                <v-divider></v-divider>
+                <TableComponent />
             </v-card>
         </v-col>
     </v-row>
 </template>
 
 <script>
+import TableComponent from '../components/Forms/TableComponent.vue'
 import SampleForm from '../components/Home/SampleForm.vue'
 
 export default {
-  components: { SampleForm },
+  components: { SampleForm, TableComponent },
   data() {
     return {
     }
