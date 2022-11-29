@@ -1,5 +1,12 @@
 <template>
   <div class="relative">
+    <v-text-field
+        label="Search"
+        variant="outlined"
+        prepend-inner-icon="fa:fas fa-search"
+        v-model="searchText"
+        @input = "onChange"
+    ></v-text-field>
       <v-table>
           <thead>
           <tr>
@@ -20,76 +27,51 @@
           </tr>
           </tbody>
       </v-table>
-      <Pagination :data="laravelData" @pagination-change-page="getResults" />
+      <pagination :data="datas" @pagination-change-page="getResults" />
   </div>
 </template>
 
 <script>
-import { TailwindPagination } from 'laravel-vue-pagination';
+import { TailwindPagination   } from 'laravel-vue-pagination';
+// import axios from 'axios';
 
 export default {
   name: 'TableComponent',
   components: {
-    'Pagination': TailwindPagination
+    'pagination': TailwindPagination 
   },
   data () {
     return {
       page: 1,
       pageSize: 0,
       headers: null,
-      laravelData: [],
-      datas: [
-        {
-          name: 'Frozen Yogurt',
-          description: 159,
-        },
-        {
-          name: 'Ice cream sandwich',
-          description: 237,
-        },
-        {
-          name: 'Eclair',
-          description: 262,
-        },
-        {
-          name: 'Cupcake',
-          description: 305,
-        },
-        {
-          name: 'Gingerbread',
-          description: 356,
-        },
-        {
-          name: 'Jelly bean',
-          description: 375,
-        },
-        {
-          name: 'Lollipop',
-          description: 392,
-        },
-        {
-          name: 'Honeycomb',
-          description: 408,
-        },
-        {
-          name: 'Donut',
-          description: 452,
-        },
-        {
-          name: 'KitKat',
-          description: 518,
-        },
-      ],
+      datas: [],
+      searchText: '',
     }
   },
   created(){
     this.getResults();
   },
   methods:{
+    onChange () {
+      console.log([{
+              name: 'Honeycomb',
+              description: 408,
+            },
+            {
+              name: 'Donut',
+              description: 452,
+            },
+            {
+              name: 'KitKat',
+              description: 518,
+            }].indexOf('KitKat'));
+    },
     getResults(page = 1) {
           // axios.get('/employee?page=' + page)
           //     .then(response => {
-          //         this.laravelData = response.data;
+          //       console.log(response);
+          //         this.datas = response.data;
           //     });
       }
   }

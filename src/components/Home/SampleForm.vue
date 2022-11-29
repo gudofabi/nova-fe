@@ -24,6 +24,12 @@
             :errors="v$.address.$errors"
         />
 
+        <TextArea
+            label="Descriptions"
+            v-model="data_form.descriptions"
+            :errors="v$.descriptions.$errors"
+        />
+
         <SelectField 
             label="States"
             :options="states"
@@ -52,6 +58,7 @@
 import { reactive, ref } from '@vue/reactivity';
 
 import InputField from '../Forms/InputField.vue';
+import TextArea from '../Forms/TextAreaField.vue';
 import CheckboxField from '../Forms/CheckboxField.vue';
 import SelectField from '../Forms/SelectField.vue';
 
@@ -66,6 +73,7 @@ const data_form = reactive({
     address: '',
     states: [],
     terms: false,
+    descriptions: '',
 })
 
 const states = ref([
@@ -91,6 +99,7 @@ const data_rules = computed(() => ({
     mobile_number: { required: helpers.withMessage('Please provide a valid mobile number',required) },
     address: { required: helpers.withMessage('Please provide a valid Address',required) },
     terms: { sameAs: helpers.withMessage('You must accept the Terms and Conditions',sameAs(true)) },
+    descriptions: { required: helpers.withMessage('Please provide a descriptions',required) },
     states: { required: helpers.withMessage('Please select states',required) },
 }))
 
