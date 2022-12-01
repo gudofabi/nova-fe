@@ -47,8 +47,10 @@ export default {
     computed: {
         comp_errorMessages() {
             const error_array = [];
-            this.errors.forEach(error => error_array.push(error.$message));
-            return error_array;
+            if(this.errors) {
+                this.errors.forEach(error => error_array.push(error.$message));
+                return error_array;
+            }
         }
     },
 

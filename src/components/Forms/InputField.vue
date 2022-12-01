@@ -1,14 +1,11 @@
 <template>
-  <div class="relative">
     <v-text-field
         :label="label"
         :type="type"
         :value="modelValue"
         :error-messages="comp_errorMessages"
         @input="func_updateInput"
-        :variant="variant"
     ></v-text-field>
-  </div>
 </template>
 
 <script>
@@ -39,8 +36,10 @@ export default {
     computed: {
         comp_errorMessages() {
             const error_array = [];
-            this.errors.forEach(error => error_array.push(error.$message));
-            return error_array;
+            if(this.errors) {
+                this.errors.forEach(error => error_array.push(error.$message));
+                return error_array;
+            }
         }
     },
 
