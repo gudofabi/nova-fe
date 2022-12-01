@@ -8,6 +8,7 @@
     persistent-hint
     :error-messages="comp_errorMessages"
     @change="func_updateInput"
+    variant="outlined"
   ></v-select>
 </template>
 

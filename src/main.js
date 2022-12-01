@@ -35,6 +35,14 @@ const vuetify = createVuetify({
     }
   },
 
+  theme: {
+    themes: {
+      light: {
+        primary: '#FFD700', // #E53935
+      },
+    },
+  },
+
 })
 // Vuetify Setup
 
