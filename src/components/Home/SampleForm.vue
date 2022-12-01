@@ -32,6 +32,12 @@
             :multiple="true"
         />
         
+        <TextareaField
+            label="Message"
+            v-model="data_form.message"
+            :errors="v$.message.$errors"
+        />
+
         <CheckboxField 
             label="Accepting Terms and Condition"
             v-model="data_form.terms"
@@ -52,6 +58,7 @@
 import { reactive, ref } from '@vue/reactivity';
 
 import InputField from '../Forms/InputField.vue';
+import TextareaField from '../Forms/TextareaField.vue';
 import CheckboxField from '../Forms/CheckboxField.vue';
 import SelectField from '../Forms/SelectField.vue';
 
@@ -66,6 +73,7 @@ const data_form = reactive({
     address: '',
     states: [],
     terms: false,
+    message: ''
 })
 
 const states = ref([
@@ -90,6 +98,7 @@ const data_rules = computed(() => ({
     email: { required: helpers.withMessage('Please provide a valid email',required), email },
     mobile_number: { required: helpers.withMessage('Please provide a valid mobile number',required) },
     address: { required: helpers.withMessage('Please provide a valid Address',required) },
+    message: { required: helpers.withMessage('You must provide a message',required) },
     terms: { sameAs: helpers.withMessage('You must accept the Terms and Conditions',sameAs(true)) },
     states: { required: helpers.withMessage('Please select states',required) },
 }))

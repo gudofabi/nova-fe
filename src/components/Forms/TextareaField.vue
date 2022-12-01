@@ -1,33 +1,36 @@
 <template>
-    <v-checkbox
-      :label="label"
-      v-model="data_checked"
-      :error-messages="comp_errorMessages"
-      @change="func_updateInput"
-    ></v-checkbox>
+    <v-textarea
+        :label="label"
+        :value="modelValue"
+        :error-messages="comp_errorMessages"
+        @input="func_updateInput"
+        :placeholder="placeholder"
+    ></v-textarea>
 </template>
 
 <script>
 export default {
     props: {
         modelValue: {
-            type: Boolean,
-            default: false
+            type: [String, Number],
+            default: ''
         },
         label: {
             type: String,
             default: 'Label'
         },
+        clearable: {
+            type: Boolean,
+            default: true
+        },
+        placeholder: {
+            type: String,
+            default: ''
+        },
         errors: {
             type: [Array, Object],
             default: () => {}
-        }
-    },
-
-    data() {
-        return {
-            data_checked: false
-        }
+        },
     },
 
     computed: {
@@ -42,9 +45,8 @@ export default {
 
     methods: {
         func_updateInput(event) {
-            this.$emit("update:modelValue", event.target.checked);
-            this.data_checked = event.target.checked;
-        }
+            this.$emit("update:modelValue", event.target.value);
+        },
     }
 }
 </script>
