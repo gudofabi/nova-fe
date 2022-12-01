@@ -5,6 +5,7 @@
         :error-messages="comp_errorMessages"
         @input="func_updateInput"
         :placeholder="placeholder"
+        variant="outlined"
     ></v-textarea>
 </template>
 

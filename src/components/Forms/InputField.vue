@@ -5,6 +5,7 @@
         :value="modelValue"
         :error-messages="comp_errorMessages"
         @input="func_updateInput"
+        variant="outlined"
     ></v-text-field>
 </template>
 
